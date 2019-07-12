@@ -8,7 +8,7 @@ public class ParkingBoy {
     }
 
     public Ticket parkCarThenReturnTicket(Car car) throws Exception {
-        if (!parkingLot.isFull()) {
+        if (!parkingLot.isFull() && !parkingLot.getLot().containsValue(car)) {
             Ticket ticket = new Ticket();
             parkingLot.getLot().put(ticket, car);
             return ticket;
