@@ -38,17 +38,18 @@ public class parkingTest {
 
 
     @Test
-    public void should_throw_exception_when_given_a_wrong_ticket() throws Exception {
+    public void should_throw_exception_show_error_message_when_given_a_wrong_ticket() throws Exception {
         // given
         Car originalCar = new Car();
         ParkingBoy parkingBoy = new ParkingBoy();
 
         // then
-        assertThrows(Exception.class, () -> {
+        Exception exception = assertThrows(Exception.class, () -> {
             // when
             Ticket ticket = new Ticket();
             parkingBoy.fetchCarByTicket(ticket);
         });
+        assertEquals("Unrecognized parking ticket",exception.getMessage());
     }
 
     @Test

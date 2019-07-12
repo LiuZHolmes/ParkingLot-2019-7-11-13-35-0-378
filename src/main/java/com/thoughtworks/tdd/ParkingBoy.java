@@ -21,7 +21,7 @@ public class ParkingBoy {
     }
 
     public Car fetchCarByTicket(Ticket ticket) throws Exception {
-        if (parkingLot.getLot().containsKey(ticket)) {
+        if (isTicketEligible(ticket)) {
             return parkingLot.getLot().remove(ticket);
         } else {
             throw new Exception();
@@ -34,5 +34,11 @@ public class ParkingBoy {
 
     private boolean isCarEligible(Car car){
         return !parkingLot.getLot().containsValue(car) && car != nullCar;
+    }
+
+    private boolean isTicketEligible(Ticket ticket) throws Exception {
+        if(parkingLot.getLot().containsKey(ticket))
+            return true;
+        else throw new Exception("Unrecognized parking ticket");
     }
 }
