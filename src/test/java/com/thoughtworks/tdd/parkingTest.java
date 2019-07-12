@@ -3,6 +3,9 @@ package com.thoughtworks.tdd;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
 public class parkingTest {
     @Test
     public void should_return_same_car_when_park_a_car_and_fetch_it_back_with_ticket() throws Exception {
@@ -13,7 +16,7 @@ public class parkingTest {
         Ticket ticket = parkingBoy.parkCarThenReturnTicket(originalCar);
         Car fetchedCar = parkingBoy.fetchCarByTicket(ticket);
         // then
-        Assertions.assertEquals(originalCar,fetchedCar);
+        assertEquals(originalCar, fetchedCar);
     }
 
 
@@ -29,7 +32,22 @@ public class parkingTest {
         Car firstFetchedCar = parkingBoy.fetchCarByTicket(firstTicket);
         Car secondFetchedCar = parkingBoy.fetchCarByTicket(secondTicket);
         // then
-        Assertions.assertEquals(firstOriginalCar,firstFetchedCar);
-        Assertions.assertEquals(secondOriginalCar,secondFetchedCar);
+        assertEquals(firstOriginalCar, firstFetchedCar);
+        assertEquals(secondOriginalCar, secondFetchedCar);
+    }
+
+
+    @Test
+    public void should_throw_exception_when_given_a_wrong_ticket() throws Exception {
+        // given
+        Car originalCar = new Car();
+        ParkingBoy parkingBoy = new ParkingBoy();
+
+        // then
+        assertThrows(Exception.class, () -> {
+            // when
+            Ticket ticket = new Ticket();
+            Car fetchedCar = parkingBoy.fetchCarByTicket(ticket);
+        });
     }
 }
