@@ -190,4 +190,16 @@ public class ParkingTest {
         // then
         assertEquals(originalCar, fetchedCar);
     }
+
+    @Test
+    public void should_park_a_car_when_parking_lot_service_manager_do_so() throws Exception {
+        // given
+        Car originalCar = new Car();
+        ParkingLotServiceManager parkingLotServiceManager = new ParkingLotServiceManager();
+        // when
+        Ticket ticket = parkingLotServiceManager.parkCarThenReturnTicket(originalCar);
+        Car fetchedCar = parkingLotServiceManager.fetchCarByTicket(ticket);
+        // then
+        assertEquals(originalCar, fetchedCar);
+    }
 }
