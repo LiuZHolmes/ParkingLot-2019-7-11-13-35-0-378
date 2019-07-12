@@ -167,4 +167,15 @@ public class ParkingTest {
         List<Integer> occupation = superSmartParkingBoy.getOccupationOfParkingLots();
         assertEquals(occupation.get(0),occupation.get(1));
     }
+
+    @Test
+    public void should_add_parking_boy_to_management_list_when_manager_do_so() {
+        // given
+        ParkingLotServiceManager parkingLotServiceManager = new ParkingLotServiceManager();
+        ParkingBoy parkingBoy = new ParkingBoy();
+        // when
+        parkingLotServiceManager.addToManagementList(parkingBoy);
+        // then
+        assertEquals(true,parkingLotServiceManager.doesParkingBoyInManagementList(parkingBoy));
+    }
 }
