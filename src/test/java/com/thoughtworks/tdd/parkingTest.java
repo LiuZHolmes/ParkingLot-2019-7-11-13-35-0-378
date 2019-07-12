@@ -71,7 +71,6 @@ public class parkingTest {
     public void should_throw_exception_when_park_a_car_to_full_parking_lot() throws Exception {
         // given
         ParkingBoy parkingBoy = new ParkingBoy();
-        // when
 
         // then
         assertThrows(Exception.class, () -> {
@@ -88,12 +87,25 @@ public class parkingTest {
         Car originalCar = new Car();
         ParkingBoy parkingBoy = new ParkingBoy();
         parkingBoy.parkCarThenReturnTicket(originalCar);
-        // when
 
         // then
         assertThrows(Exception.class, () -> {
             // when
             parkingBoy.parkCarThenReturnTicket(originalCar);
+
+        });
+    }
+
+    @Test
+    public void should_throw_exception_when_park_a_null_car() throws Exception {
+        // given
+        final Car nullCar = null;
+        ParkingBoy parkingBoy = new ParkingBoy();
+
+        // then
+        assertThrows(Exception.class, () -> {
+            // when
+            parkingBoy.parkCarThenReturnTicket(nullCar);
 
         });
     }

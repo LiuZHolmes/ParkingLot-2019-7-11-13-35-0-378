@@ -1,6 +1,8 @@
 package com.thoughtworks.tdd;
 
 public class ParkingBoy {
+    private static final Car nullCar = null;
+
     private ParkingLot parkingLot;
 
     public ParkingBoy() {
@@ -8,7 +10,7 @@ public class ParkingBoy {
     }
 
     public Ticket parkCarThenReturnTicket(Car car) throws Exception {
-        if (!parkingLot.isFull() && !parkingLot.getLot().containsValue(car)) {
+        if (isParkingLotAvaliable(car) && isCarEligible(car) ) {
             Ticket ticket = new Ticket();
             parkingLot.getLot().put(ticket, car);
             return ticket;
@@ -24,5 +26,13 @@ public class ParkingBoy {
         } else {
             throw new Exception();
         }
+    }
+
+    private boolean isParkingLotAvaliable(Car car){
+        return !parkingLot.isFull() && !parkingLot.getLot().containsValue(car);
+    }
+
+    private boolean isCarEligible(Car car){
+        return car != nullCar;
     }
 }
