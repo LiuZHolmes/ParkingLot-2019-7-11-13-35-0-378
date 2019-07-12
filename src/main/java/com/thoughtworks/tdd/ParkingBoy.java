@@ -10,14 +10,17 @@ public class ParkingBoy {
     }
 
     public Ticket parkCarThenReturnTicket(Car car) throws Exception {
-        if (isParkingLotAvaliable(car) && isCarEligible(car) ) {
+        if (isParkingLotAvailable(car) && isCarEligible(car)) {
             Ticket ticket = new Ticket();
             parkingLot.getLot().put(ticket, car);
             return ticket;
-        }
-        else {
+        } else {
             throw new Exception();
         }
+    }
+
+    public Car fetchCarByTicket() throws Exception {
+        throw new Exception("Please provide your parking ticket");
     }
 
     public Car fetchCarByTicket(Ticket ticket) throws Exception {
@@ -28,16 +31,16 @@ public class ParkingBoy {
         }
     }
 
-    private boolean isParkingLotAvaliable(Car car){
+    private boolean isParkingLotAvailable(Car car) {
         return !parkingLot.isFull();
     }
 
-    private boolean isCarEligible(Car car){
+    private boolean isCarEligible(Car car) {
         return !parkingLot.getLot().containsValue(car) && car != nullCar;
     }
 
     private boolean isTicketEligible(Ticket ticket) throws Exception {
-        if(parkingLot.getLot().containsKey(ticket))
+        if (parkingLot.getLot().containsKey(ticket))
             return true;
         else throw new Exception("Unrecognized parking ticket");
     }

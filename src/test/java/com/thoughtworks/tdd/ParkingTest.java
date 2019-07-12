@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-public class parkingTest {
+public class ParkingTest {
     @Test
     public void should_return_same_car_when_park_a_car_and_fetch_it_back_with_ticket() throws Exception {
         // given
@@ -36,7 +36,6 @@ public class parkingTest {
         assertEquals(secondOriginalCar, secondFetchedCar);
     }
 
-
     @Test
     public void should_throw_exception_show_error_message_when_given_a_wrong_ticket() throws Exception {
         // given
@@ -51,6 +50,22 @@ public class parkingTest {
         });
         assertEquals("Unrecognized parking ticket",exception.getMessage());
     }
+
+    @Test
+    public void should_throw_exception_show_error_message_when_not_given_ticket() throws Exception {
+        // given
+        Car originalCar = new Car();
+        ParkingBoy parkingBoy = new ParkingBoy();
+
+        // then
+        Exception exception = assertThrows(Exception.class, () -> {
+            // when
+            Ticket ticket = new Ticket();
+            parkingBoy.fetchCarByTicket();
+        });
+        assertEquals("Please provide your parking ticket",exception.getMessage());
+    }
+
 
     @Test
     public void should_throw_exception_when_given_a_fetched_ticket() throws Exception {
