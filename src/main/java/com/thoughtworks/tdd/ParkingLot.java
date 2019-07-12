@@ -24,6 +24,9 @@ public class ParkingLot {
         return lot;
     }
 
+    public Integer getOccupation() {
+        return lot.size();
+    }
 
     boolean isAvailable() {
         return lot.size() <= capacity;

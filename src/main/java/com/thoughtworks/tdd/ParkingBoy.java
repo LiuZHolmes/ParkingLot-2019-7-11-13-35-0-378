@@ -8,14 +8,13 @@ public class ParkingBoy {
 
     private static final Car nullCar = null;
 
-    private int numberOfParkingLots;
+    private final int defaultNumberOfParkingLots = 2;
 
-    private List<ParkingLot> parkingLots;
+    protected List<ParkingLot> parkingLots;
 
     public ParkingBoy() {
         parkingLots = new ArrayList<>();
-        numberOfParkingLots = 2;
-        for (int i = 0;i < numberOfParkingLots;i++)
+        for (int i = 0;i < defaultNumberOfParkingLots;i++)
         {
             parkingLots.add(new ParkingLot());
         }
@@ -24,7 +23,7 @@ public class ParkingBoy {
     public Ticket parkCarThenReturnTicket(Car car) throws Exception {
         if (isParkingLotAvailable() && isCarEligible(car)) {
             Ticket ticket = new Ticket();
-            parkingLots.stream().filter(x -> x.isAvailable())
+            parkingLots.stream().filter(ParkingLot::isAvailable)
                     .collect(Collectors.toList()).get(0)
                     .getLot().put(ticket, car);
             return ticket;
@@ -33,7 +32,7 @@ public class ParkingBoy {
         }
     }
 
-    public Car fetchCarByTicket() throws Exception {
+    public void fetchCarByTicket() throws Exception {
         throw new Exception("Please provide your parking ticket");
     }
 
@@ -47,14 +46,14 @@ public class ParkingBoy {
         }
     }
 
-    private boolean isParkingLotAvailable() throws Exception {
-        if (parkingLots.stream().anyMatch(x -> x.isAvailable()))
+    protected boolean isParkingLotAvailable() throws Exception {
+        if (parkingLots.stream().anyMatch(ParkingLot::isAvailable))
             return true;
         else throw new Exception("Not enough position");
     }
 
-    private boolean isCarEligible(Car car) {
-        return parkingLots.stream().allMatch(x -> !x.getLot().containsValue(car)) && car != nullCar;
+    protected boolean isCarEligible(Car car) {
+        return parkingLots.stream().noneMatch(x -> x.getLot().containsValue(car)) && car != nullCar;
     }
 
     private boolean isTicketEligible(Ticket ticket) throws Exception {
@@ -68,6 +67,6 @@ public class ParkingBoy {
     }
 
     public List<Integer> getOccupationOfParkingLots(){
-        return parkingLots.stream().map(x -> x.getLot().size()).collect(Collectors.toList());
+        return parkingLots.stream().map(ParkingLot::getOccupation).collect(Collectors.toList());
     }
 }
