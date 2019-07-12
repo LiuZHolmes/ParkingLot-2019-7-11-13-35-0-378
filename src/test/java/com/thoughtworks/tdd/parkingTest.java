@@ -81,4 +81,20 @@ public class parkingTest {
             }
         });
     }
+
+    @Test
+    public void should_throw_exception_when_park_a_parked_car() throws Exception {
+        // given
+        Car originalCar = new Car();
+        ParkingBoy parkingBoy = new ParkingBoy();
+        parkingBoy.parkCarThenReturnTicket(originalCar);
+        // when
+
+        // then
+        assertThrows(Exception.class, () -> {
+            // when
+            parkingBoy.parkCarThenReturnTicket(originalCar);
+
+        });
+    }
 }

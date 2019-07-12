@@ -6,22 +6,24 @@ public class ParkingLot {
 
     private HashMap<Ticket, Car> lot;
 
-    private int size;
+    private int capacity;
 
-    public ParkingLot(int size) {
+    public ParkingLot(int capacity) {
         lot = new HashMap<>();
-        this.size = size;
+        this.capacity = capacity;
     }
 
     ParkingLot() {
         lot = new HashMap<>();
+        capacity = 10;
     }
 
     public HashMap<Ticket, Car> getLot() {
         return lot;
     }
 
+
     boolean isFull() {
-        return lot.size() == size;
+        return lot.size() == capacity;
     }
 }
