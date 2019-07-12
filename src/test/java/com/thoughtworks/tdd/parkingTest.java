@@ -66,4 +66,19 @@ public class parkingTest {
             parkingBoy.fetchCarByTicket(ticket);
         });
     }
+
+    @Test
+    public void should_throw_exception_when_park_a_car_to_full_parking_lot() throws Exception {
+        // given
+        ParkingBoy parkingBoy = new ParkingBoy();
+        // when
+
+        // then
+        assertThrows(Exception.class, () -> {
+            // when
+            while (true) {
+                parkingBoy.parkCarThenReturnTicket(new Car());
+            }
+        });
+    }
 }

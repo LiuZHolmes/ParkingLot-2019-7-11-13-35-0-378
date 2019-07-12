@@ -7,17 +7,21 @@ public class ParkingBoy {
         parkingLot = new ParkingLot();
     }
 
-    public Ticket parkCarThenReturnTicket(Car car) {
-        Ticket ticket = new Ticket();
-        parkingLot.getLot().put(ticket,car);
-        return ticket;
+    public Ticket parkCarThenReturnTicket(Car car) throws Exception {
+        if (!parkingLot.isFull()) {
+            Ticket ticket = new Ticket();
+            parkingLot.getLot().put(ticket, car);
+            return ticket;
+        }
+        else {
+            throw new Exception();
+        }
     }
 
     public Car fetchCarByTicket(Ticket ticket) throws Exception {
         if (parkingLot.getLot().containsKey(ticket)) {
             return parkingLot.getLot().remove(ticket);
-        }
-        else {
+        } else {
             throw new Exception();
         }
     }
