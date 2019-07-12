@@ -78,10 +78,11 @@ public class ParkingTest {
         parkingBoy.fetchCarByTicket(ticket);
 
         // then
-        assertThrows(Exception.class, () -> {
+        Exception exception = assertThrows(Exception.class, () -> {
             // when
             parkingBoy.fetchCarByTicket(ticket);
         });
+        assertEquals("Unrecognized parking ticket",exception.getMessage());
     }
 
     @Test
@@ -201,5 +202,73 @@ public class ParkingTest {
         Car fetchedCar = parkingLotServiceManager.fetchCarByTicket(ticket);
         // then
         assertEquals(originalCar, fetchedCar);
+    }
+
+    @Test
+    public void should_throw_exception_show_error_message_when_given_a_wrong_ticket_to_in_list_parking_boy() throws Exception {
+        // given
+        Car originalCar = new Car();
+        ParkingLotServiceManager parkingLotServiceManager = new ParkingLotServiceManager();
+        parkingLotServiceManager.addToManagementList(new ParkingBoy());
+
+        // then
+        Exception exception = assertThrows(Exception.class, () -> {
+            // when
+            Ticket ticket = new Ticket();
+            parkingLotServiceManager.fetchCarByTicketBySpecificParkingBoy(ticket);
+        });
+        assertEquals("Unrecognized parking ticket",exception.getMessage());
+    }
+
+    @Test
+    public void should_throw_exception_show_error_message_when_not_given_ticket_to_in_list_parking_boy() throws Exception {
+        // given
+        Car originalCar = new Car();
+        ParkingLotServiceManager parkingLotServiceManager = new ParkingLotServiceManager();
+        parkingLotServiceManager.addToManagementList(new ParkingBoy());
+
+        // then
+        Exception exception = assertThrows(Exception.class, () -> {
+            // when
+            Ticket ticket = new Ticket();
+            parkingLotServiceManager.fetchCarByTicketBySpecificParkingBoy();
+        });
+        assertEquals("Please provide your parking ticket",exception.getMessage());
+    }
+
+
+    @Test
+    public void should_throw_exception_when_given_a_used_ticket_to_in_list_parking_boy() throws Exception {
+        // given
+        Car originalCar = new Car();
+        ParkingLotServiceManager parkingLotServiceManager = new ParkingLotServiceManager();
+        parkingLotServiceManager.addToManagementList(new ParkingBoy());
+        // when
+        Ticket ticket = parkingLotServiceManager.ParkCarThenReturnTicketBySpecificParkingBoy(originalCar);
+        parkingLotServiceManager.fetchCarByTicketBySpecificParkingBoy(ticket);
+
+        // then
+        Exception exception = assertThrows(Exception.class, () -> {
+            // when
+            parkingLotServiceManager.fetchCarByTicketBySpecificParkingBoy(ticket);
+        });
+        assertEquals("Unrecognized parking ticket",exception.getMessage());
+    }
+
+    @Test
+    public void should_throw_exception_and_show_message_when_park_a_car_to_full_parking_lot_by_in_list_parking_boy() throws Exception {
+        // given
+        ParkingBoy parkingBoy = new ParkingBoy();
+        ParkingLotServiceManager parkingLotServiceManager = new ParkingLotServiceManager();
+        parkingLotServiceManager.addToManagementList(new ParkingBoy());
+
+        // then
+        Exception exception = assertThrows(Exception.class, () -> {
+            // when
+            while (true) {
+                parkingLotServiceManager.ParkCarThenReturnTicketBySpecificParkingBoy(new Car());
+            }
+        });
+        assertEquals("Not enough position",exception.getMessage());
     }
 }

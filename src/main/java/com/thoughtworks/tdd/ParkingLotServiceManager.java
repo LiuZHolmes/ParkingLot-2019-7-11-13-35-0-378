@@ -26,4 +26,8 @@ public class ParkingLotServiceManager extends ParkingBoy{
     public Car fetchCarByTicketBySpecificParkingBoy(Ticket ticket) throws Exception {
         return managementList.get(0).fetchCarByTicket(ticket);
     }
+
+    public void fetchCarByTicketBySpecificParkingBoy() throws Exception {
+        super.fetchCarByTicket();
+    }
 }
