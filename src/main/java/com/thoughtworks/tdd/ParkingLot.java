@@ -25,7 +25,7 @@ public class ParkingLot {
     }
 
 
-    boolean isFull() {
-        return lot.size() == capacity;
+    boolean isAvailable() {
+        return lot.size() <= capacity;
     }
 }

@@ -126,4 +126,19 @@ public class ParkingTest {
 
         });
     }
+
+    @Test
+    public void should_park_a_car_to_second_slot_when_first_slot_is_full_and_park_a_car() throws Exception {
+        // given
+        Car originalCar = new Car();
+        ParkingBoy parkingBoy = new ParkingBoy();
+        while (parkingBoy.isParkingLotAvailableAt(0)) {
+            parkingBoy.parkCarThenReturnTicket(new Car());
+        }
+        // when
+        Ticket ticket = parkingBoy.parkCarThenReturnTicket(originalCar);
+        Car fetchedCar = parkingBoy.fetchCarByTicket(ticket);
+        // then
+        assertEquals(originalCar, fetchedCar);
+    }
 }
