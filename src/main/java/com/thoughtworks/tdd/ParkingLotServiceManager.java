@@ -18,4 +18,12 @@ public class ParkingLotServiceManager extends ParkingBoy{
     public boolean doesParkingBoyInManagementList(ParkingBoy parkingBoy) {
         return managementList.contains(parkingBoy);
     }
+
+    public Ticket ParkCarThenReturnTicketBySpecificParkingBoy(Car car) throws Exception {
+        return managementList.get(0).parkCarThenReturnTicket(car);
+    }
+
+    public Car fetchCarByTicketBySpecificParkingBoy(Ticket ticket) throws Exception {
+        return managementList.get(0).fetchCarByTicket(ticket);
+    }
 }

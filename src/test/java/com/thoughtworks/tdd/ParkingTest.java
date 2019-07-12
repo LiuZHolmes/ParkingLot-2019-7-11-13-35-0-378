@@ -5,8 +5,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class ParkingTest {
     @Test
@@ -169,13 +168,26 @@ public class ParkingTest {
     }
 
     @Test
-    public void should_add_parking_boy_to_management_list_when_manager_do_so() {
+    public void should_add_parking_boy_to_management_list_when_parking_lot_service_manager_do_so() {
         // given
         ParkingLotServiceManager parkingLotServiceManager = new ParkingLotServiceManager();
         ParkingBoy parkingBoy = new ParkingBoy();
         // when
         parkingLotServiceManager.addToManagementList(parkingBoy);
         // then
-        assertEquals(true,parkingLotServiceManager.doesParkingBoyInManagementList(parkingBoy));
+        assertTrue(parkingLotServiceManager.doesParkingBoyInManagementList(parkingBoy));
+    }
+
+    @Test
+    public void should_park_a_car_when_parking_lot_service_manager_specify_a_parking_boy_to_do_so() throws Exception {
+        // given
+        ParkingLotServiceManager parkingLotServiceManager = new ParkingLotServiceManager();
+        parkingLotServiceManager.addToManagementList(new ParkingBoy());
+        Car originalCar = new Car();
+        // when
+        Ticket ticket = parkingLotServiceManager.ParkCarThenReturnTicketBySpecificParkingBoy(originalCar);
+        Car fetchedCar = parkingLotServiceManager.fetchCarByTicketBySpecificParkingBoy(ticket);
+        // then
+        assertEquals(originalCar, fetchedCar);
     }
 }
