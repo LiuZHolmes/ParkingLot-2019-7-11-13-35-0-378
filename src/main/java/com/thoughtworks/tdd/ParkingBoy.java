@@ -15,7 +15,7 @@ public class ParkingBoy {
 
     public Car fetchCarByTicket(Ticket ticket) throws Exception {
         if (parkingLot.getLot().containsKey(ticket)) {
-            return parkingLot.getLot().get(ticket);
+            return parkingLot.getLot().remove(ticket);
         }
         else {
             throw new Exception();

@@ -47,7 +47,23 @@ public class parkingTest {
         assertThrows(Exception.class, () -> {
             // when
             Ticket ticket = new Ticket();
-            Car fetchedCar = parkingBoy.fetchCarByTicket(ticket);
+            parkingBoy.fetchCarByTicket(ticket);
+        });
+    }
+
+    @Test
+    public void should_throw_exception_when_given_a_fetched_ticket() throws Exception {
+        // given
+        Car originalCar = new Car();
+        ParkingBoy parkingBoy = new ParkingBoy();
+        // when
+        Ticket ticket = parkingBoy.parkCarThenReturnTicket(originalCar);
+        parkingBoy.fetchCarByTicket(ticket);
+
+        // then
+        assertThrows(Exception.class, () -> {
+            // when
+            parkingBoy.fetchCarByTicket(ticket);
         });
     }
 }
