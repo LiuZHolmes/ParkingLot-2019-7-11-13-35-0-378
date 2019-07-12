@@ -29,10 +29,10 @@ public class ParkingBoy {
     }
 
     private boolean isParkingLotAvaliable(Car car){
-        return !parkingLot.isFull() && !parkingLot.getLot().containsValue(car);
+        return !parkingLot.isFull();
     }
 
     private boolean isCarEligible(Car car){
-        return car != nullCar;
+        return !parkingLot.getLot().containsValue(car) && car != nullCar;
     }
 }
