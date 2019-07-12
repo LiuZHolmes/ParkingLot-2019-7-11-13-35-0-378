@@ -66,4 +66,8 @@ public class ParkingBoy {
     public boolean isParkingLotAvailableAt(int index) {
         return parkingLots.get(index).isAvailable();
     }
+
+    public List<Integer> getOccupationOfParkingLots(){
+        return parkingLots.stream().map(x -> x.getLot().size()).collect(Collectors.toList());
+    }
 }

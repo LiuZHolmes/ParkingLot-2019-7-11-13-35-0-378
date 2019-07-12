@@ -3,6 +3,8 @@ package com.thoughtworks.tdd;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
@@ -140,5 +142,17 @@ public class ParkingTest {
         Car fetchedCar = parkingBoy.fetchCarByTicket(ticket);
         // then
         assertEquals(originalCar, fetchedCar);
+    }
+
+    @Test
+    public void should_park_a_car_to_parking_lot_that_is_more_positions_when_smart_parking_boy_park_a_car() throws Exception {
+        // given
+        SmartParkingBoy smartParkingBoy = new SmartParkingBoy();
+        // when
+        smartParkingBoy.parkCarThenReturnTicket(new Car());
+        smartParkingBoy.parkCarThenReturnTicket(new Car());
+        // then
+        List<Integer> occupation = smartParkingBoy.getOccupationOfParkingLots();
+        assertEquals(occupation.get(0),occupation.get(1));
     }
 }
