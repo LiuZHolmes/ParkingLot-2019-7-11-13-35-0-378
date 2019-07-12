@@ -3,12 +3,12 @@ package com.thoughtworks.tdd;
 import java.util.Comparator;
 import java.util.stream.Collectors;
 
-public class SmartParkingBoy extends ParkingBoy{
+public class SuperSmartParkingBoy extends ParkingBoy {
     @Override
     public Ticket parkCarThenReturnTicket(Car car) throws Exception {
         if (isParkingLotAvailable() && isCarEligible(car)) {
             Ticket ticket = new Ticket();
-            parkingLots.stream().sorted(Comparator.comparing(ParkingLot::getEmptyPositions).reversed())
+            parkingLots.stream().sorted(Comparator.comparing(ParkingLot::getAvailablePositionRate).reversed())
                     .collect(Collectors.toList()).get(0)
                     .getLot().put(ticket, car);
             return ticket;
@@ -17,3 +17,4 @@ public class SmartParkingBoy extends ParkingBoy{
         }
     }
 }
+

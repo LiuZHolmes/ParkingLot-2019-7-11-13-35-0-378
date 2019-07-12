@@ -28,6 +28,18 @@ public class ParkingLot {
         return lot.size();
     }
 
+    public Integer getEmptyPositions() {
+        return capacity - getOccupation();
+    }
+
+    public int getCapacity() {
+        return capacity;
+    }
+
+    public Double getAvailablePositionRate() {
+        return getEmptyPositions().doubleValue() / getCapacity();
+    }
+
     boolean isAvailable() {
         return lot.size() <= capacity;
     }

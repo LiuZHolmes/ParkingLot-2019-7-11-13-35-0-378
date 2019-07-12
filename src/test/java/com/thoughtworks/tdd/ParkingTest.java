@@ -155,4 +155,16 @@ public class ParkingTest {
         List<Integer> occupation = smartParkingBoy.getOccupationOfParkingLots();
         assertEquals(occupation.get(0),occupation.get(1));
     }
+
+    @Test
+    public void should_park_a_car_to_parking_lot_that_has_larger_available_position_rate_when_super_smart_parking_boy_park_a_car() throws Exception {
+        // given
+        SuperSmartParkingBoy superSmartParkingBoy = new SuperSmartParkingBoy();
+        // when
+        superSmartParkingBoy.parkCarThenReturnTicket(new Car());
+        superSmartParkingBoy.parkCarThenReturnTicket(new Car());
+        // then
+        List<Integer> occupation = superSmartParkingBoy.getOccupationOfParkingLots();
+        assertEquals(occupation.get(0),occupation.get(1));
+    }
 }
