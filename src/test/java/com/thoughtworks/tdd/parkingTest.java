@@ -13,7 +13,7 @@ public class parkingTest {
         Ticket ticket = parkingBoy.parkCarThenReturnTicket(originalCar);
         Car fetchedCar = parkingBoy.fetchCarByTicket(ticket);
         // then
-        Assertions.assertEquals(fetchedCar,originalCar);
+        Assertions.assertEquals(originalCar,fetchedCar);
     }
 
 
