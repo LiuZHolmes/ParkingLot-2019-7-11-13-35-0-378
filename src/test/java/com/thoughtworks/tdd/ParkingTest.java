@@ -68,7 +68,7 @@ public class ParkingTest {
 
 
     @Test
-    public void should_throw_exception_when_given_a_fetched_ticket() throws Exception {
+    public void should_throw_exception_when_given_a_used_ticket() throws Exception {
         // given
         Car originalCar = new Car();
         ParkingBoy parkingBoy = new ParkingBoy();
@@ -84,17 +84,18 @@ public class ParkingTest {
     }
 
     @Test
-    public void should_throw_exception_when_park_a_car_to_full_parking_lot() throws Exception {
+    public void should_throw_exception_and_show_message_when_park_a_car_to_full_parking_lot() throws Exception {
         // given
         ParkingBoy parkingBoy = new ParkingBoy();
 
         // then
-        assertThrows(Exception.class, () -> {
+        Exception exception = assertThrows(Exception.class, () -> {
             // when
             while (true) {
                 parkingBoy.parkCarThenReturnTicket(new Car());
             }
         });
+        assertEquals("Not enough position",exception.getMessage());
     }
 
     @Test

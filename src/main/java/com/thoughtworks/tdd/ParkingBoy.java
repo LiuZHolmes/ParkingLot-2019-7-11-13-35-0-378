@@ -31,8 +31,10 @@ public class ParkingBoy {
         }
     }
 
-    private boolean isParkingLotAvailable(Car car) {
-        return !parkingLot.isFull();
+    private boolean isParkingLotAvailable(Car car) throws Exception {
+        if (!parkingLot.isFull())
+            return true;
+        else throw new Exception("Not enough position");
     }
 
     private boolean isCarEligible(Car car) {
