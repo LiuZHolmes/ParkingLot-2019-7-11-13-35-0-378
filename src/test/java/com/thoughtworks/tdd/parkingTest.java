@@ -15,4 +15,21 @@ public class parkingTest {
         // then
         Assertions.assertEquals(fetchedCar,originalCar);
     }
+
+
+    @Test
+    public void should_return_same_cars_when_park_cars_and_fetch_them_back_with_tickets() throws Exception {
+        // given
+        Car firstOriginalCar = new Car();
+        Car secondOriginalCar = new Car();
+        ParkingBoy parkingBoy = new ParkingBoy();
+        // when
+        Ticket firstTicket = parkingBoy.parkCarThenReturnTicket(firstOriginalCar);
+        Ticket secondTicket = parkingBoy.parkCarThenReturnTicket(secondOriginalCar);
+        Car firstFetchedCar = parkingBoy.fetchCarByTicket(firstTicket);
+        Car secondFetchedCar = parkingBoy.fetchCarByTicket(secondTicket);
+        // then
+        Assertions.assertEquals(firstOriginalCar,firstFetchedCar);
+        Assertions.assertEquals(secondOriginalCar,secondFetchedCar);
+    }
 }
