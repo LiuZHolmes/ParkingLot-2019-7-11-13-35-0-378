@@ -53,10 +53,9 @@ public class ParkingBoy {
             throw new ParkingLotNotAvailableException("Not enough position");
     }
 
-    protected boolean isCarEligible(Car car) throws CarNotEligibleException {
-        if (parkingLots.stream().noneMatch(x -> x.getLot().containsValue(car)) && car != nullCar)
-            return true;
-        else throw new CarNotEligibleException();
+    private void isCarEligible(Car car) throws CarNotEligibleException {
+        if (parkingLots.stream().anyMatch(x -> x.getLot().containsValue(car)) || car == nullCar)
+            throw new CarNotEligibleException();
     }
 
     private void testIfTicketIsEligible(Ticket ticket) throws TicketNotEligibleException {
