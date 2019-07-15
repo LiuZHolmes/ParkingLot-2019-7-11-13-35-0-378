@@ -48,10 +48,9 @@ public class ParkingBoy {
 
     }
 
-    protected boolean isParkingLotAvailable() throws ParkingLotNotAvailableException {
-        if (parkingLots.stream().anyMatch(ParkingLot::isAvailable))
-            return true;
-        else throw new ParkingLotNotAvailableException("Not enough position");
+    private void isParkingLotAvailable() throws ParkingLotNotAvailableException {
+        if (parkingLots.stream().noneMatch(ParkingLot::isAvailable))
+            throw new ParkingLotNotAvailableException("Not enough position");
     }
 
     protected boolean isCarEligible(Car car) throws CarNotEligibleException {
