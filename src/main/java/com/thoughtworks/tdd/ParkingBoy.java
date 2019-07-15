@@ -32,34 +32,36 @@ public class ParkingBoy {
         }
     }
 
-    public void fetchCarByTicket() throws Exception {
-        throw new Exception("Please provide your parking ticket");
+    public void fetchCarByTicket() throws TicketNotEligibleException {
+        throw new TicketNotEligibleException("Please provide your parking ticket");
     }
 
-    public Car fetchCarByTicket(Ticket ticket) throws Exception {
+    public Car fetchCarByTicket(Ticket ticket) throws TicketNotEligibleException {
         if (isTicketEligible(ticket)) {
             return parkingLots.stream().filter(x -> x.getLot().containsKey(ticket))
                     .collect(Collectors.toList())
                     .get(0).getLot().remove(ticket);
         } else {
-            throw new Exception();
+            throw new TicketNotEligibleException();
         }
     }
 
-    protected boolean isParkingLotAvailable() throws Exception {
+    protected boolean isParkingLotAvailable() throws ParkingLotNotAvailableException {
         if (parkingLots.stream().anyMatch(ParkingLot::isAvailable))
             return true;
-        else throw new Exception("Not enough position");
+        else throw new ParkingLotNotAvailableException("Not enough position");
     }
 
-    protected boolean isCarEligible(Car car) {
-        return parkingLots.stream().noneMatch(x -> x.getLot().containsValue(car)) && car != nullCar;
+    protected boolean isCarEligible(Car car) throws CarNotEligibleException {
+        if (parkingLots.stream().noneMatch(x -> x.getLot().containsValue(car)) && car != nullCar)
+            return true;
+        else throw  new CarNotEligibleException();
     }
 
-    private boolean isTicketEligible(Ticket ticket) throws Exception {
+    private boolean isTicketEligible(Ticket ticket) throws TicketNotEligibleException {
         if (parkingLots.stream().anyMatch(x -> x.getLot().containsKey(ticket)))
             return true;
-        else throw new Exception("Unrecognized parking ticket");
+        else throw new TicketNotEligibleException("Unrecognized parking ticket");
     }
 
     public boolean isParkingLotAvailableAt(int index) {

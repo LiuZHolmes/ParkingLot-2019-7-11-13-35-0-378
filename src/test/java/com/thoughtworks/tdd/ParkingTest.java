@@ -38,13 +38,12 @@ public class ParkingTest {
     }
 
     @Test
-    public void should_throw_exception_show_error_message_when_given_a_wrong_ticket() throws Exception {
+    public void should_throw_exception_show_error_message_when_given_a_wrong_ticket() throws TicketNotEligibleException {
         // given
-        Car originalCar = new Car();
         ParkingBoy parkingBoy = new ParkingBoy();
 
         // then
-        Exception exception = assertThrows(Exception.class, () -> {
+        Exception exception = assertThrows(TicketNotEligibleException.class, () -> {
             // when
             Ticket ticket = new Ticket();
             parkingBoy.fetchCarByTicket(ticket);
@@ -53,13 +52,12 @@ public class ParkingTest {
     }
 
     @Test
-    public void should_throw_exception_show_error_message_when_not_given_ticket() throws Exception {
+    public void should_throw_exception_show_error_message_when_not_given_ticket() throws TicketNotEligibleException {
         // given
-        Car originalCar = new Car();
         ParkingBoy parkingBoy = new ParkingBoy();
 
         // then
-        Exception exception = assertThrows(Exception.class, () -> {
+        Exception exception = assertThrows(TicketNotEligibleException.class, () -> {
             // when
             Ticket ticket = new Ticket();
             parkingBoy.fetchCarByTicket();
@@ -78,7 +76,7 @@ public class ParkingTest {
         parkingBoy.fetchCarByTicket(ticket);
 
         // then
-        Exception exception = assertThrows(Exception.class, () -> {
+        Exception exception = assertThrows(TicketNotEligibleException.class, () -> {
             // when
             parkingBoy.fetchCarByTicket(ticket);
         });
@@ -86,12 +84,12 @@ public class ParkingTest {
     }
 
     @Test
-    public void should_throw_exception_and_show_message_when_park_a_car_to_full_parking_lot() throws Exception {
+    public void should_throw_exception_and_show_message_when_park_a_car_to_full_parking_lot() throws ParkingLotNotAvailableException {
         // given
         ParkingBoy parkingBoy = new ParkingBoy();
 
         // then
-        Exception exception = assertThrows(Exception.class, () -> {
+        Exception exception = assertThrows(ParkingLotNotAvailableException.class, () -> {
             // when
             while (true) {
                 parkingBoy.parkCarThenReturnTicket(new Car());
@@ -108,7 +106,7 @@ public class ParkingTest {
         parkingBoy.parkCarThenReturnTicket(originalCar);
 
         // then
-        assertThrows(Exception.class, () -> {
+        assertThrows(CarNotEligibleException.class, () -> {
             // when
             parkingBoy.parkCarThenReturnTicket(originalCar);
 
@@ -122,7 +120,7 @@ public class ParkingTest {
         ParkingBoy parkingBoy = new ParkingBoy();
 
         // then
-        assertThrows(Exception.class, () -> {
+        assertThrows(CarNotEligibleException.class, () -> {
             // when
             parkingBoy.parkCarThenReturnTicket(nullCar);
 
@@ -207,12 +205,11 @@ public class ParkingTest {
     @Test
     public void should_throw_exception_show_error_message_when_given_a_wrong_ticket_to_in_list_parking_boy() throws Exception {
         // given
-        Car originalCar = new Car();
         ParkingLotServiceManager parkingLotServiceManager = new ParkingLotServiceManager();
         parkingLotServiceManager.addToManagementList(new ParkingBoy());
 
         // then
-        Exception exception = assertThrows(Exception.class, () -> {
+        Exception exception = assertThrows(TicketNotEligibleException.class, () -> {
             // when
             Ticket ticket = new Ticket();
             parkingLotServiceManager.fetchCarByTicketBySpecificParkingBoy(ticket);
@@ -223,12 +220,11 @@ public class ParkingTest {
     @Test
     public void should_throw_exception_show_error_message_when_not_given_ticket_to_in_list_parking_boy() throws Exception {
         // given
-        Car originalCar = new Car();
         ParkingLotServiceManager parkingLotServiceManager = new ParkingLotServiceManager();
         parkingLotServiceManager.addToManagementList(new ParkingBoy());
 
         // then
-        Exception exception = assertThrows(Exception.class, () -> {
+        Exception exception = assertThrows(TicketNotEligibleException.class, () -> {
             // when
             Ticket ticket = new Ticket();
             parkingLotServiceManager.fetchCarByTicketBySpecificParkingBoy();
@@ -248,7 +244,7 @@ public class ParkingTest {
         parkingLotServiceManager.fetchCarByTicketBySpecificParkingBoy(ticket);
 
         // then
-        Exception exception = assertThrows(Exception.class, () -> {
+        Exception exception = assertThrows(TicketNotEligibleException.class, () -> {
             // when
             parkingLotServiceManager.fetchCarByTicketBySpecificParkingBoy(ticket);
         });
@@ -263,7 +259,7 @@ public class ParkingTest {
         parkingLotServiceManager.addToManagementList(new ParkingBoy());
 
         // then
-        Exception exception = assertThrows(Exception.class, () -> {
+        Exception exception = assertThrows(ParkingLotNotAvailableException.class, () -> {
             // when
             while (true) {
                 parkingLotServiceManager.ParkCarThenReturnTicketBySpecificParkingBoy(new Car());
