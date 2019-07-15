@@ -1,8 +1,10 @@
 package com.thoughtworks.tdd;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class ParkingBoy {
 
@@ -13,11 +15,7 @@ public class ParkingBoy {
     protected List<ParkingLot> parkingLots;
 
     public ParkingBoy() {
-        parkingLots = new ArrayList<>();
-        for (int i = 0;i < defaultNumberOfParkingLots;i++)
-        {
-            parkingLots.add(new ParkingLot());
-        }
+        parkingLots = IntStream.rangeClosed(1,defaultNumberOfParkingLots).boxed().map(x -> new ParkingLot()).collect(Collectors.toList());
     }
 
     public Ticket parkCarThenReturnTicket(Car car) throws Exception {

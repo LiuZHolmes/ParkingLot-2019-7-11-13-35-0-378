@@ -15,7 +15,7 @@ public class ParkingLot {
         this.capacity = capacity;
     }
 
-    ParkingLot() {
+    public ParkingLot() {
         lot = new HashMap<>();
         capacity = defaultCapacity;
     }
