@@ -10,11 +10,6 @@ public class ParkingLot {
 
     private int capacity;
 
-    public ParkingLot(int capacity) {
-        lot = new HashMap<>();
-        this.capacity = capacity;
-    }
-
     public ParkingLot() {
         lot = new HashMap<>();
         capacity = defaultCapacity;
