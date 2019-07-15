@@ -32,7 +32,7 @@ public class ParkingBoy {
     }
 
     protected void testIfParkingIsDoable(Car car) throws ParkingLotNotAvailableException, CarNotEligibleException {
-        isParkingLotAvailable() ;
+        isParkingLotAvailable();
         isCarEligible(car);
     }
 
@@ -41,13 +41,11 @@ public class ParkingBoy {
     }
 
     public Car fetchCarByTicket(Ticket ticket) throws TicketNotEligibleException {
-        if (isTicketEligible(ticket)) {
-            return parkingLots.stream().filter(x -> x.getLot().containsKey(ticket))
-                    .collect(Collectors.toList())
-                    .get(0).getLot().remove(ticket);
-        } else {
-            throw new TicketNotEligibleException();
-        }
+        testIfTicketIsEligible(ticket);
+        return parkingLots.stream().filter(x -> x.getLot().containsKey(ticket))
+                .collect(Collectors.toList())
+                .get(0).getLot().remove(ticket);
+
     }
 
     protected boolean isParkingLotAvailable() throws ParkingLotNotAvailableException {
@@ -62,10 +60,9 @@ public class ParkingBoy {
         else throw new CarNotEligibleException();
     }
 
-    private boolean isTicketEligible(Ticket ticket) throws TicketNotEligibleException {
-        if (parkingLots.stream().anyMatch(x -> x.getLot().containsKey(ticket)))
-            return true;
-        else throw new TicketNotEligibleException("Unrecognized parking ticket");
+    private void testIfTicketIsEligible(Ticket ticket) throws TicketNotEligibleException {
+        if (parkingLots.stream().noneMatch(x -> x.getLot().containsKey(ticket)))
+            throw new TicketNotEligibleException("Unrecognized parking ticket");
     }
 
     public boolean isParkingLotAvailableAt(int index) {
