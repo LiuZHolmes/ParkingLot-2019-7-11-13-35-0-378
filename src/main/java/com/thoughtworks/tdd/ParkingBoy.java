@@ -20,6 +20,10 @@ public class ParkingBoy {
 
     public Ticket parkCarThenReturnTicket(Car car) throws Exception {
         testIfParkingIsDoable(car);
+        return parkCar(car);
+    }
+
+    protected Ticket parkCar(Car car) {
         Ticket ticket = new Ticket();
         parkingLots.stream().filter(ParkingLot::isAvailable)
                 .collect(Collectors.toList()).get(0)
@@ -27,7 +31,7 @@ public class ParkingBoy {
         return ticket;
     }
 
-    private void testIfParkingIsDoable(Car car) throws ParkingLotNotAvailableException, CarNotEligibleException {
+    protected void testIfParkingIsDoable(Car car) throws ParkingLotNotAvailableException, CarNotEligibleException {
         isParkingLotAvailable() ;
         isCarEligible(car);
     }
